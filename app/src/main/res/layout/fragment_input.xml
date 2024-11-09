@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center"
+    android:background="@drawable/bgheart">
+
+    <ImageView
+        android:layout_width="300sp"
+        android:layout_height="300sp"
+        android:src="@drawable/loveme"
+        android:layout_marginBottom="60sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Love Calculator"
+        android:layout_gravity="start"
+        android:textSize="24sp"
+        android:textColor="#F44D74"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="20sp"
+        android:textSize="18sp"
+        android:text="First Name"/>
+
+    <EditText
+        android:id="@+id/etFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:paddingStart="10sp"
+        android:background="@drawable/edittext_background"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="20sp"
+        android:textSize="18sp"
+        android:text="Second Name"/>
+
+    <EditText
+        android:id="@+id/etSecondName"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:paddingStart="10sp"
+        android:background="@drawable/edittext_background"
+         />
+
+    <Button
+        android:id="@+id/btnCalculate"
+        android:layout_width="wrap_content"
+        android:layout_height="55sp"
+        android:text="Calculate"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_marginTop="40sp"
+        android:backgroundTint="#F44D74"
+        android:textColor="@color/white"
+        android:layout_marginBottom="30sp"/>
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnimation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:lottie_autoPlay="false"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading_animation" />
+</LinearLayout>
