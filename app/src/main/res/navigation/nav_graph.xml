@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/inputFragment"
-        android:name="com.example.lovecalculator.InputFragment"
+        android:name="com.example.lovecalculator.ui.InputFragment"
         android:label="Home"
         tools:layout="@layout/fragment_input">
         <action
@@ -15,11 +15,17 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_inputFragment_to_resultFragment2"
+            app:destination="@id/resultFragment" />
+        <action
+            android:id="@+id/action_inputFragment_to_resultFragment3"
+            app:destination="@id/resultFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/resultFragment"
-        android:name="com.example.lovecalculator.ResultFragment"
+        android:name="com.example.lovecalculator.ui.ResultFragment"
         android:label="Result"
         tools:layout="@layout/fragment_result">
         <argument

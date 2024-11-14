@@ -2,4 +2,6 @@
     <string name="app_name">LoveCalculator</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="KEY">d63455e580mshff4c05fa8fbdd69p18f514jsndaad0fd1e31f</string>
+    <string name="HOST">love-calculator.p.rapidapi.com</string>
 </resources>

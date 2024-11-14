@@ -1,4 +1,4 @@
-package com.example.lovecalculator
+package com.example.lovecalculator.data
 
 import retrofit2.http.GET
 import retrofit2.http.Header

@@ -30,12 +30,14 @@
         android:layout_gravity="start"
         android:layout_marginTop="20sp"
         android:textSize="18sp"
+        android:textColor="#534C4C"
         android:text="First Name"/>
 
     <EditText
         android:id="@+id/etFirstName"
         android:layout_width="match_parent"
         android:layout_height="40sp"
+        android:hint="First Name"
         android:paddingStart="10sp"
         android:background="@drawable/edittext_background"/>
 
@@ -45,12 +47,14 @@
         android:layout_gravity="start"
         android:layout_marginTop="20sp"
         android:textSize="18sp"
+        android:textColor="#534C4C"
         android:text="Second Name"/>
 
     <EditText
         android:id="@+id/etSecondName"
         android:layout_width="match_parent"
         android:layout_height="40sp"
+        android:hint="Second Name"
         android:paddingStart="10sp"
         android:background="@drawable/edittext_background"
          />
@@ -72,7 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:lottie_autoPlay="false"
+        app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/loading_animation" />
 </LinearLayout>
