@@ -37,7 +37,7 @@
         android:id="@+id/etFirstName"
         android:layout_width="match_parent"
         android:layout_height="40sp"
-        android:hint="First Name"
+        android:hint="Введите имя"
         android:paddingStart="10sp"
         android:background="@drawable/edittext_background"/>
 
@@ -54,7 +54,7 @@
         android:id="@+id/etSecondName"
         android:layout_width="match_parent"
         android:layout_height="40sp"
-        android:hint="Second Name"
+        android:hint="Введите имя"
         android:paddingStart="10sp"
         android:background="@drawable/edittext_background"
          />
