@@ -6,88 +6,54 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.example.lovecalculator.data.LoveModel
-import com.example.lovecalculator.data.RetrofitInstance
 import com.example.lovecalculator.databinding.FragmentInputBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
-class InputFragment : Fragment(), Contract.View {
+class InputFragment : Fragment() {
 
     private lateinit var binding: FragmentInputBinding
-    private lateinit var presenter: Contract.Presenter
+    private val viewModel: LoveViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentInputBinding.inflate(inflater, container, false)
-        presenter = Presenter(this, RetrofitInstance.api)
 
         setupUI()
+        observeViewModel()
+
         return binding.root
     }
 
     private fun setupUI() {
-        binding.etFirstName.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                binding.etFirstName.hint = ""
-            } else {
-                binding.etFirstName.hint = "Введите имя"
-            }
-        }
-
-        binding.etSecondName.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                binding.etSecondName.hint = ""
-            } else {
-                binding.etSecondName.hint = "Введите имя"
-            }
-        }
-
         binding.btnCalculate.setOnClickListener {
             val firstName = binding.etFirstName.text.toString().trim()
             val secondName = binding.etSecondName.text.toString().trim()
-            presenter.calculateLovePercentage(firstName, secondName)
+            viewModel.calculateLovePercentage(firstName, secondName)
         }
     }
 
+    private fun observeViewModel() {
+        viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
+            binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.btnCalculate.isEnabled = !isLoading
+        })
 
-    override fun showLoading() {
-            binding.loadingAnimation.visibility = View.VISIBLE
-        }
+        viewModel.loveResult.observe(viewLifecycleOwner, Observer { result ->
+            val action = InputFragmentDirections.actionInputFragmentToResultFragment(
+                result.firstName,
+                result.secondName,
+                result.percentage,
+                result.result
+            )
+            findNavController().navigate(action)
+        })
 
-
-    override fun hideLoading() {
-        binding.loadingAnimation.visibility = View.GONE
-        binding.btnCalculate.isEnabled = true
-    }
-
-    override fun showResult(result: LoveModel) {
-            lifecycleScope.launch {
-                binding.loadingAnimation.visibility = View.VISIBLE
-                binding.loadingAnimation.playAnimation()
-
-                delay(4000)
-                val action = InputFragmentDirections.actionInputFragmentToResultFragment(
-                    result.firstName,
-                    result.secondName,
-                    result.percentage,
-                    result.result
-                )
-                findNavController().navigate(action)
-            }
-    }
-
-    override fun showError(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        binding.etFirstName.text.clear()
-        binding.etSecondName.text.clear()
+        viewModel.error.observe(viewLifecycleOwner, Observer { message ->
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        })
     }
 }
