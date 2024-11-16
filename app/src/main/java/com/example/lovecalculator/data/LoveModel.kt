@@ -2,7 +2,7 @@ package com.example.lovecalculator.data
 
 import com.google.gson.annotations.SerializedName
 
-data class LoveModel (
+data class LoveModel(
     @SerializedName("fname")
     val firstName: String,
     @SerializedName("sname")
