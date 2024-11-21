@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id ("androidx.navigation.safeargs.kotlin")
+    id ("kotlin-kapt")
+    id ("com.google.dagger.hilt.android")
 
 }
 
@@ -41,9 +43,14 @@ android {
         jvmTarget = "1.8"
     }
 }
+kapt {
+    correctErrorTypes = true
+}
 
 dependencies {
 
+    implementation ("com.google.dagger:hilt-android:2.51.1")
+    kapt ("com.google.dagger:hilt-compiler:2.51.1")
     implementation ("com.airbnb.android:lottie:6.5.2")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
