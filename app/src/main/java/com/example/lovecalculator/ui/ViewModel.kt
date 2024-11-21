@@ -4,13 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.lovecalculator.data.LoveModel
-import com.example.lovecalculator.data.RetrofitInstance
+import com.example.lovecalculator.data.ApiService
 import com.example.lovecalculator.utils.Constants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class LoveViewModel : ViewModel() {
+@HiltViewModel
+class ViewModel @Inject constructor(
+    private val apiService: ApiService
+) : ViewModel() {
 
     private val _loveResult = MutableLiveData<LoveModel>()
     val loveResult: LiveData<LoveModel> get() = _loveResult
@@ -29,7 +34,7 @@ class LoveViewModel : ViewModel() {
 
         _loading.value = true
 
-        RetrofitInstance.api.getPercentage(
+        apiService.getPercentage(
             firstName,
             secondName,
             Constants.API_KEY,
