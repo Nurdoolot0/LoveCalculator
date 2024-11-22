@@ -80,34 +80,42 @@ class FirstView : Fragment() {
             binding.tvLc.visibility = View.INVISIBLE
 
             Handler().postDelayed({
-                navigateToSecondScreen()
             }, 3500)
         }, 1000)
     }
 
-    private fun navigateToSecondScreen() {
-        val firstName = binding.etFirstName.text.toString().trim()
-        val secondName = binding.etSecondName.text.toString().trim()
-        val action = FirstViewDirections.actionInputFragmentToResultFragment(
-            firstName,
-            secondName,
-            0,
-            ""
-        )
-        findNavController().navigate(action)
-    }
+
 
     private fun observeViewModel() {
         viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
-            binding.loadingAnimation.visibility = View.VISIBLE
+            binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
             binding.btnCalculate.isEnabled = !isLoading
         })
 
         viewModel.loveResult.observe(viewLifecycleOwner, Observer { result ->
+            result?.let {
+                navigateToSecondScreen(
+                    firstName = binding.etFirstName.text.toString().trim(),
+                    secondName = binding.etSecondName.text.toString().trim(),
+                    percentage = it.percentage,
+                    loveResult = it.result
+                )
+            }
         })
 
         viewModel.error.observe(viewLifecycleOwner, Observer { message ->
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+            binding.loadingAnimation.visibility = View.GONE
         })
+    }
+
+    private fun navigateToSecondScreen(firstName: String, secondName: String, percentage: Int, loveResult: String) {
+        val action = FirstViewDirections.actionInputFragmentToResultFragment(
+            firstName,
+            secondName,
+            percentage,
+            loveResult
+        )
+        findNavController().navigate(action)
     }
 }
