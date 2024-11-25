@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import com.example.lovecalculator.R
+import com.example.lovecalculator.data.local.LoveResultEntity
 import com.example.lovecalculator.databinding.FragmentInputBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,6 +22,9 @@ class FirstView : Fragment() {
 
     private lateinit var binding: FragmentInputBinding
     private val viewModel: ViewModel by viewModels()
+    private val historyViewModel: HistoryViewModel by viewModels()
+
+    private var isResultSaved = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,13 +39,19 @@ class FirstView : Fragment() {
     }
 
     private fun setupUI() {
+        binding.btnGoToHistory.setOnClickListener {
+            findNavController().navigate(R.id.action_inputFragment_to_historyFragment)
+        }
+
         binding.btnCalculate.setOnClickListener {
             val firstName = binding.etFirstName.text.toString().trim()
             val secondName = binding.etSecondName.text.toString().trim()
-
-            binding.loadingAnimation.visibility = View.VISIBLE
-
             makeElementsTransparent()
+
+            if (firstName.isEmpty() || secondName.isEmpty()) {
+                Toast.makeText(context, "Оба имени должны быть заполнены", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             viewModel.calculateLovePercentage(firstName, secondName)
         }
@@ -84,8 +95,6 @@ class FirstView : Fragment() {
         }, 1000)
     }
 
-
-
     private fun observeViewModel() {
         viewModel.loading.observe(viewLifecycleOwner, Observer { isLoading ->
             binding.loadingAnimation.visibility = if (isLoading) View.VISIBLE else View.GONE
@@ -94,6 +103,15 @@ class FirstView : Fragment() {
 
         viewModel.loveResult.observe(viewLifecycleOwner, Observer { result ->
             result?.let {
+                if (!isResultSaved) {
+                    saveResultToDatabase(
+                        firstName = binding.etFirstName.text.toString().trim(),
+                        secondName = binding.etSecondName.text.toString().trim(),
+                        percentage = it.percentage,
+                        loveResult = it.result
+                    )
+                    isResultSaved = true
+                }
                 navigateToSecondScreen(
                     firstName = binding.etFirstName.text.toString().trim(),
                     secondName = binding.etSecondName.text.toString().trim(),
@@ -107,6 +125,16 @@ class FirstView : Fragment() {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
             binding.loadingAnimation.visibility = View.GONE
         })
+    }
+
+    private fun saveResultToDatabase(firstName: String, secondName: String, percentage: Int, loveResult: String) {
+        val loveResultEntity = LoveResultEntity(
+            firstName = firstName,
+            secondName = secondName,
+            percentage = percentage,
+            result = loveResult
+        )
+        historyViewModel.insertResult(loveResultEntity)
     }
 
     private fun navigateToSecondScreen(firstName: String, secondName: String, percentage: Int, loveResult: String) {

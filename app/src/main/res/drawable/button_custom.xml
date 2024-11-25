@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Тень -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" />
+            <solid android:color="#55000000"/>
+        </shape>
+    </item>
+
+    <!-- Основной фон -->
+    <item android:top="4dp" android:left="4dp">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="45"
+                android:startColor="#FF6A00" >
+
+            </gradient>
+            android:endColor="#FFD700"
+            android:type="linear" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Обводка -->
+    <item android:top="4dp" android:left="4dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="12dp" />
+            <stroke
+                android:width="2dp"
+                android:color="#FF4500" /> <!-- Красноватый цвет обводки -->
+        </shape>
+    </item>
+</layer-list>

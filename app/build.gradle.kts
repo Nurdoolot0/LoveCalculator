@@ -49,7 +49,14 @@ kapt {
 
 dependencies {
 
+    implementation (libs.kotlinx.coroutines.android)
+    implementation ("androidx.room:room-ktx:2.6.1")
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
     implementation ("com.google.dagger:hilt-android:2.51.1")
+    implementation(libs.androidx.databinding.common)
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.7")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.8.7")
     kapt ("com.google.dagger:hilt-compiler:2.51.1")
     implementation ("com.airbnb.android:lottie:6.5.2")
     implementation(libs.androidx.core.ktx)
