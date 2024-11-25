@@ -3,8 +3,8 @@ package com.example.lovecalculator.ui
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.lovecalculator.data.LoveModel
-import com.example.lovecalculator.data.ApiService
+import com.example.lovecalculator.data.network.LoveModel
+import com.example.lovecalculator.data.network.ApiService
 import com.example.lovecalculator.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ViewModel @Inject constructor(
-    private val apiService: ApiService
+    private val apiService: ApiService,
 ) : ViewModel() {
 
     private val _loveResult = MutableLiveData<LoveModel>()
@@ -33,7 +33,6 @@ class ViewModel @Inject constructor(
         }
 
         _loading.value = true
-
         apiService.getPercentage(
             firstName,
             secondName,
@@ -45,6 +44,7 @@ class ViewModel @Inject constructor(
                 if (response.isSuccessful) {
                     response.body()?.let {
                         _loveResult.value = it
+
                     } ?: run {
                         _error.value = "Ошибка получения данных"
                     }
@@ -59,4 +59,4 @@ class ViewModel @Inject constructor(
             }
         })
     }
-}
+    }

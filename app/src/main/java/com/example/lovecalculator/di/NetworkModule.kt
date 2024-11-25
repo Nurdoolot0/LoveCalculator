@@ -1,6 +1,6 @@
 package com.example.lovecalculator.di
 
-import com.example.lovecalculator.data.ApiService
+import com.example.lovecalculator.data.network.ApiService
 import com.example.lovecalculator.utils.Constants
 import dagger.Module
 import dagger.Provides

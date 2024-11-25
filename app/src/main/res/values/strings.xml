@@ -4,4 +4,9 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="KEY">d63455e580mshff4c05fa8fbdd69p18f514jsndaad0fd1e31f</string>
     <string name="HOST">love-calculator.p.rapidapi.com</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">close\n</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+    <string name="home">Home</string>
 </resources>

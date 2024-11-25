@@ -1,88 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center"
-    android:background="@drawable/bgheart">
+    android:background="@drawable/backpink">
 
-    <ImageView
-        android:id="@+id/image_ht"
-        android:layout_width="300sp"
-        android:layout_height="300sp"
-        android:src="@drawable/loveme"
-        android:layout_marginBottom="60sp"/>
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/loading_animation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/heart_beat" />
-
-    <TextView
-        android:id="@+id/tv_lc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Love Calculator"
-        android:layout_gravity="start"
-        android:textSize="24sp"
-        android:textColor="#F44D74"
-        android:textStyle="bold"
-        android:gravity="center" />
-
-    <TextView
-        android:id="@+id/tv_fn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="20sp"
-        android:textSize="18sp"
-        android:textColor="#534C4C"
-        android:text="First Name"/>
-
-    <EditText
-        android:id="@+id/etFirstName"
+    <!-- Основной контейнер для контента -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40sp"
-        android:hint="Введите имя"
-        android:paddingStart="10sp"
-        android:background="@drawable/edittext_background"/>
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tv_sn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginTop="20sp"
-        android:textSize="18sp"
-        android:textColor="#534C4C"
-        android:text="Second Name"/>
+        <ImageView
+            android:id="@+id/image_ht"
+            android:layout_width="300sp"
+            android:layout_height="300sp"
+            android:layout_marginBottom="60sp"
+            android:src="@drawable/unnamed" />
 
-    <EditText
-        android:id="@+id/etSecondName"
-        android:layout_width="match_parent"
-        android:layout_height="40sp"
-        android:hint="Введите имя"
-        android:paddingStart="10sp"
-        android:background="@drawable/edittext_background"
-         />
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_animation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/heart_beat" />
 
+        <TextView
+            android:id="@+id/tv_lc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:fontFamily="@font/namaku"
+            android:gravity="center"
+            android:paddingBottom="20sp"
+            android:text="Love Calculator"
+            android:textColor="#FF2500"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_fn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="20sp"
+            android:fontFamily="@font/namaku"
+            android:text="First Name"
+            android:textColor="#534C4C"
+            android:textSize="26sp" />
+
+        <EditText
+            android:id="@+id/etFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:background="@drawable/edittext_background"
+            android:hint="Введите имя"
+            android:paddingStart="13sp"
+            android:textColor="@color/black"
+            android:textColorHint="#6D6666"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_sn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginTop="20sp"
+            android:fontFamily="@font/namaku"
+            android:text="Second Name"
+            android:textColor="#534C4C"
+            android:textSize="26sp" />
+
+        <EditText
+            android:id="@+id/etSecondName"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:background="@drawable/edittext_background"
+            android:hint="Введите имя"
+            android:paddingStart="13sp"
+            android:textColor="@color/black"
+            android:textColorHint="#6D6666"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnCalculate"
+            android:layout_width="wrap_content"
+            android:layout_height="65sp"
+            android:layout_marginTop="40sp"
+            android:layout_marginBottom="30sp"
+            android:backgroundTint="#FF2500"
+            android:fontFamily="@font/namaku"
+            android:text="Calculate"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+    </LinearLayout>
+
+    <!-- Кнопка для перехода на HistoryFragment, которая будет поверх всего контента -->
     <Button
-        android:id="@+id/btnCalculate"
+        android:id="@+id/btnGoToHistory"
         android:layout_width="wrap_content"
-        android:layout_height="55sp"
-        android:text="Calculate"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginTop="40sp"
-        android:backgroundTint="#F44D74"
-        android:textColor="@color/white"
-        android:layout_marginBottom="30sp"/>
+        android:layout_height="wrap_content"
+        android:text="History"
+        android:layout_gravity="start"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="#3CA0B8"
+        android:textColor="@android:color/white" />
 
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
